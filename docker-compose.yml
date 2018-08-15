@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  api:
+    build: '.'
+    container_name: 'stevens-api-graphql'
+    networks:
+      - default
+      - traefik_proxy
+    labels:
+      traefik.enable: 'true'
+      traefik.frontend.rule: 'Host: stevens-api.robherley.xyz'
+      traefik.backend: 'stevens-api-graphql'
+      traefik.docker.network: 'traefik_proxy'
+    environment:
+      - MONGO_URI=mongo://db:27017
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    image: mongo
+    container_name: 'stevens-api-mongo'
+    restart: always
+
+networks:
+  traefik_proxy:
+    external:
+      name: traefik_proxy

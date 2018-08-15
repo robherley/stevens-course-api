@@ -22,9 +22,10 @@ func main() {
 	h := handler.New(&handler.Config{
 		Schema:   &graphapi.Schema,
 		Pretty:   true,
-		GraphiQL: true,
+		GraphiQL: false,
 	})
 
 	http.Handle("/", h)
+	http.Handle("/play", http.StripPrefix("/play", http.FileServer(http.Dir("./static"))))
 	http.ListenAndServe(":8080", nil)
 }

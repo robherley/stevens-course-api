@@ -127,7 +127,7 @@ var queryType = graphql.NewObject(graphql.ObjectConfig{
 				cn := p.Args["callnumber"].(string)
 				sem := p.Args["semester"].(string)
 
-				s, c, err := mongo.GetSemester(sem)
+				s, c, err := mongo.SafeGetSemester(sem)
 				if err != nil {
 					return nil, err
 				}
@@ -161,7 +161,7 @@ var queryType = graphql.NewObject(graphql.ObjectConfig{
 				sec := p.Args["section"].(string)
 				sem := p.Args["semester"].(string)
 
-				s, c, err := mongo.GetSemester(sem)
+				s, c, err := mongo.SafeGetSemester(sem)
 				if err != nil {
 					return nil, err
 				}

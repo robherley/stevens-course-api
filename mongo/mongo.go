@@ -15,6 +15,17 @@ func GetSemester(s string) (*mgo.Session, *mgo.Collection, error) {
 		panic(err)
 	}
 
+	collection := session.DB("semester").C(s)
+	return session, collection, nil
+}
+
+//SafeGetSemester throws an error when trying to get a bad semester not in db
+func SafeGetSemester(s string) (*mgo.Session, *mgo.Collection, error) {
+	session, err := mgo.Dial(os.Getenv("MONGO_URI"))
+	if err != nil {
+		panic(err)
+	}
+
 	cnames, err := session.DB("semester").CollectionNames()
 	if err != nil {
 		panic(err)

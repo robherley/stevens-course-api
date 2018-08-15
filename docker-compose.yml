@@ -13,7 +13,7 @@ services:
       traefik.backend: 'stevens-api-graphql'
       traefik.docker.network: 'traefik_proxy'
     environment:
-      - MONGO_URI=mongo://db:27017
+      - MONGO_URI=db:27017
     restart: always
     depends_on:
       - db

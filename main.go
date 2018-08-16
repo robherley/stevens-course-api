@@ -26,6 +26,6 @@ func main() {
 	})
 
 	http.Handle("/", h)
-	http.Handle("/play", http.StripPrefix("/play", http.FileServer(http.Dir("./static"))))
+	http.Handle("/play", http.StripPrefix("/play", http.FileServer(http.Dir("./third-party"))))
 	http.ListenAndServe(":8080", nil)
 }
